@@ -140,12 +140,23 @@
       from { opacity: 0.2; transform: scale(0.5); }
       to { opacity: 1; transform: scale(1.2); }
     }
+	
+	
+	.message {
+  font-size: 1.2rem;
+  color: #444;
+  margin-top: 10px;
+  text-align: center;
+  min-height: 24px;
+  transition: opacity 0.3s;
+}
   </style>
 </head>
 <body>
 
   <!-- Игра -->
   <div class="game-container" id="game">
+  <div class="message" id="message"></div>
     <div class="score" id="score">Года: 0 / 20</div>
     <div class="target" id="target">+1 год</div>
   </div>
@@ -191,6 +202,8 @@
       target.style.top = `${y}px`;
     }
 
+const message = document.getElementById('message');
+
 target.addEventListener('click', () => {
   if (score < 20) {
     score++;
@@ -199,27 +212,31 @@ target.addEventListener('click', () => {
 
     // Показываем сообщения при определённых годах
     if (score === 5) {
-      alert("Прям как у огурчика IQ");
+      message.textContent = "Прям как у огурчика IQ";
     } else if (score === 10) {
-      alert(" 10 раз я бы дал на рот , но не скажу кому ");
+      message.textContent = "10 раз я бы дал на рот, но не скажу кому";
     } else if (score === 15) {
-      alert("Ты опаздываешь!");
+      message.textContent = "Ты опаздываешь!";
+    } else if (score === 19) {
+      message.textContent = "Кремируйте ее быстрее!";
+	 
+	} else {
+      message.textContent = ""; // очищаем сообщение, если не попадание в нужный год
+    } 
+
+    if (score === 20 && !cardShown) {
+      message.textContent = "Кремируйте ее быстрее";
+      cardShown = true;
+      game.classList.add('hidden');
+      setTimeout(() => {
+        document.body.style.transform = 'scale(1)';
+        document.body.style.transformOrigin = 'top left';
+        document.body.style.zoom = '90%';
+
+        card.classList.remove('hidden');
+        showPage(1);
+      }, 300);
     }
-  }
-
-  if (score === 20 && !cardShown) {
-    alert(" Кремируйте ее быстрее");
-
-    cardShown = true;
-    game.classList.add('hidden');
-    setTimeout(() => {
-      document.body.style.transform = 'scale(1)';
-      document.body.style.transformOrigin = 'top left';
-      document.body.style.zoom = '90%';
-
-      card.classList.remove('hidden');
-      showPage(1);
-    }, 300);
   }
 });
 
