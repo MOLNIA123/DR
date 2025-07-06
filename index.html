@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Открытка другу</title>
+  <title>Открытка</title>
   <style>
     * {
       box-sizing: border-box;
@@ -104,7 +104,7 @@
       color: #333;
       user-select: none;
       position: absolute;
-      bottom: 20px;
+      bottom: -15px;
     }
 
     @keyframes bounce {
@@ -154,14 +154,14 @@
 </head>
 <body>
 
-  <!-- Игра -->
+  
   <div class="game-container" id="game">
   <div class="message" id="message"></div>
     <div class="score" id="score">Года: 0 / 20</div>
     <div class="target" id="target">+1 год</div>
   </div>
 
-  <!-- Открытка -->
+
   <div class="card-container hidden" id="card">
     <div class="page" id="page-1">
       <img src="страница-1.png" alt="Страница 1">
@@ -184,7 +184,7 @@
     </div>
   </div>
 
-  <!-- Звёздочки -->
+
   <div class="stars" id="stars"></div>
 
   <script>
@@ -210,18 +210,28 @@ target.addEventListener('click', () => {
     scoreText.textContent = `Года: ${score} / 20`;
     moveTarget();
 
-    // Показываем сообщения при определённых годах
+    
     if (score === 5) {
       message.textContent = "Прям как у огурчика IQ";
     } else if (score === 10) {
       message.textContent = "10 раз я бы дал на рот, но не скажу кому";
     } else if (score === 15) {
       message.textContent = "Ты опаздываешь!";
-    } else if (score === 19) {
+    } else if (score === 11) {
+      message.textContent = "Скинь голые фотки плизз!";
+	 
+	} else if (score === 12) {
+      message.textContent = "И еще скинь коня плизз";
+	} else if (score === 13) {
+      message.textContent = "Ты такой красивый";
+	} else if (score === 14) {
+      message.textContent = "Так что скинешь коня?";
+	 
+	} else if (score === 19) {
       message.textContent = "Кремируйте ее быстрее!";
 	 
 	} else {
-      message.textContent = ""; // очищаем сообщение, если не попадание в нужный год
+      message.textContent = ""; 
     } 
 
     if (score === 20 && !cardShown) {
@@ -250,7 +260,7 @@ target.addEventListener('click', () => {
       });
     }
 
-    // Появление звёздочек
+    
     const starsContainer = document.getElementById('stars');
     for (let i = 0; i < 30; i++) {
       const star = document.createElement('div');
@@ -261,7 +271,7 @@ target.addEventListener('click', () => {
       starsContainer.appendChild(star);
     }
 
-    moveTarget(); // начальное перемещение
+    moveTarget(); 
   </script>
 </body>
 </html>
